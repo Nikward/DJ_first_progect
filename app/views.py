@@ -1,7 +1,11 @@
 import datetime
+import json
+import os
 
 from django.http import HttpResponse
 from django.shortcuts import render, reverse
+
+from first_project.settings import BASE_DIR
 
 
 def home_view(request):
@@ -29,7 +33,6 @@ def time_view(request):
 
 
 def workdir_view(request):
-    # по аналогии с `time_view`, напишите код,
-    # который возвращает список файлов в рабочей 
-    # директории
-    raise NotImplemented
+    list_workdir = os.listdir(BASE_DIR)
+    your_list_as_json = json.dumps(list_workdir)
+    return HttpResponse(your_list_as_json)
